@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tilt-a-Maze</title>
+    <link rel="stylesheet" href="/styles/login.css" />
+  </head>
+  <body>
+    <div class="maze">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+    <div class="container">
+      <h2>Tilt-a-Maze</h2>
+      <form id="homeForm">
+        <div class="form-group">
+          <label for="userName">Username</label>
+          <input type="text" id="userName" name="userName" required />
+        </div>
+        <div class="join">
+          <button type="submit">Go to lobby</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      document
+        .getElementById("homeForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const userName = document.getElementById("userName").value;
+
+          localStorage.setItem("userName", userName);
+
+          window.location.href = "game.html";
+        });
+    </script>
+  </body>
+</html>
