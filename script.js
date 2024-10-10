@@ -89,7 +89,7 @@ const plotGrid = () => {
   }
 };
 
-const fps = 60;
+const fps = 70;
 const draw = () => {
   ctx.clearRect(0, 0, 300, 300);
   plotGrid();
@@ -116,17 +116,28 @@ const handleOrientation = (event) => {
     playerId: deviceId,
   });
 };
-
-const getDeviceOrientation = () => {
   
-    // Handle regular non iOS 13+ devices.
-    window.addEventListener("deviceorientation", handleOrientation);
-
-};
-
-startButton.addEventListener("click", () => {
-  socket.emit("startGame");
-});
+const getDeviceOrientation = () => {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      // Handle iOS 13+ devices.
+      DeviceOrientationEvent.requestPermission()
+        .then((state) => {
+          if (state === "granted") {
+            window.addEventListener("deviceorientation", handleOrientation);
+          } else {
+            console.error("Request to access the orientation was rejected");
+          }
+        })
+        .catch(console.error);
+    } else {
+      // Handle regular non iOS 13+ devices.
+      window.addEventListener("deviceorientation", handleOrientation);
+    }
+  };
+  
+  startButton.addEventListener("click", () => {
+    socket.emit("startGame");
+  });
 
 genMazeButton.addEventListener("click", () => {
   socket.emit("genMaze");
