@@ -40,9 +40,6 @@ app.use(express.static(__dirname));
 
 const PORT = 3000;
 
-app.get("/", function (req, res) {
-  res.sendFile(path.join(__dirname, "login.html"));
-});
 
 app.get("/game", function (req, res) {
   res.sendFile(path.join(__dirname, "game.html"));
