@@ -208,33 +208,33 @@ const updateBallsPosition = (xTilt, yTilt) => {
     }
 
     // Check for collision with other balls
-    for (let j = 0; j < users.length; j++) {
-      if (j !== idx) {
-        const otherBall = users[j];
-        const dx = otherBall.x - nextX;
-        const dy = otherBall.y - nextY;
-        const distance = Math.sqrt(dx * dx + dy * dy);
+    // for (let j = 0; j < users.length; j++) {
+    //   if (j !== idx) {
+    //     const otherBall = users[j];
+    //     const dx = otherBall.x - nextX;
+    //     const dy = otherBall.y - nextY;
+    //     const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Collision detected
-        if (distance < ball.radius + otherBall.radius) {
-          // Resolve collision by adjusting positions
-          const angle = Math.atan2(dy, dx);
-          const sin = Math.sin(angle);
-          const cos = Math.cos(angle);
+    //     // Collision detected
+    //     if (distance < ball.radius + otherBall.radius) {
+    //       // Resolve collision by adjusting positions
+    //       const angle = Math.atan2(dy, dx);
+    //       const sin = Math.sin(angle);
+    //       const cos = Math.cos(angle);
 
-          // Separate the balls to prevent overlap
-          const overlap = 0.5 * (ball.radius + otherBall.radius - distance);
-          nextX -= overlap * cos;
-          nextY -= overlap * sin;
-          otherBall.x += overlap * cos;
-          otherBall.y += overlap * sin;
+    //       // Separate the balls to prevent overlap
+    //       const overlap = 0.5 * (ball.radius + otherBall.radius - distance);
+    //       nextX -= overlap * cos;
+    //       nextY -= overlap * sin;
+    //       otherBall.x += overlap * cos;
+    //       otherBall.y += overlap * sin;
 
-          // Simple elastic collision response (swap velocities)
-          [ball.dx, otherBall.dx] = [otherBall.dx, ball.dx];
-          [ball.dy, otherBall.dy] = [otherBall.dy, ball.dy];
-        }
-      }
-    }
+    //       // Simple elastic collision response (swap velocities)
+    //       [ball.dx, otherBall.dx] = [otherBall.dx, ball.dx];
+    //       [ball.dy, otherBall.dy] = [otherBall.dy, ball.dy];
+    //     }
+    //   }
+    // }
 
     ball.x = nextX;
     ball.y = nextY;
@@ -345,28 +345,28 @@ io.on("connection", (socket) => {
         totalYTilt += tiltValues[id].yTilt;
         totalGamma += tiltValues[id].gamma;
         totalBeta += tiltValues[id].beta;
-        numPlayers++;
+      //  numPlayers++;
       }
 
-      let avgXTilt;
-      let avgYTilt;
-      let avgGamma;
-      let avgBeta;
+      let avgXTilt=totalXTilt;
+      let avgYTilt= totalYTilt;
+      let avgGamma = totalGamma;
+      let avgBeta =totalBeta;
 
-      if (numPlayers === 4) {
-        avgXTilt = maxXTilt;
-        avgYTilt = maxYTilt; // Corrected here
-        avgGamma = maxGamma;
-        avgBeta = maxBeta;
-      } else if (numPlayers > 0) {
-        // Check to avoid division by zero
-        avgXTilt = totalXTilt / numPlayers;
-        avgYTilt = totalYTilt / numPlayers;
-        avgGamma = totalGamma / numPlayers;
-        avgBeta = totalBeta / numPlayers;
-      } else {
-        avgXTilt = avgYTilt = avgGamma = avgBeta = 0;
-      }
+      // if (numPlayers === 4) {
+      //   avgXTilt = maxXTilt;
+      //   avgYTilt = maxYTilt; // Corrected here
+      //   avgGamma = maxGamma;
+      //   avgBeta = maxBeta;
+      // } else if (numPlayers > 0) {
+      //   // Check to avoid division by zero
+      //   avgXTilt = totalXTilt / numPlayers;
+      //   avgYTilt = totalYTilt / numPlayers;
+      //   avgGamma = totalGamma / numPlayers;
+      //   avgBeta = totalBeta / numPlayers;
+      // } else {
+      //   avgXTilt = avgYTilt = avgGamma = avgBeta = 0;
+      // }
 
       updateBallsPosition(avgXTilt, avgYTilt);
       checkWin();
