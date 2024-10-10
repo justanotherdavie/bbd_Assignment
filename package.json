@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "express": "^4.21.1",
-    "jsdom": "^25.0.1"
+    "jsdom": "^25.0.1",
+    "socket.io": "^4.8.0"
   }
 }
