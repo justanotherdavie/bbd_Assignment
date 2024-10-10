@@ -207,7 +207,7 @@ const updateBallsPosition = (xTilt, yTilt) => {
       }
     }
 
-    Check for collision with other balls
+    //Check for collision with other balls
     for (let j = 0; j < users.length; j++) {
       if (j !== idx) {
         const otherBall = users[j];
