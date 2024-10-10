@@ -116,6 +116,7 @@ const handleOrientation = (event) => {
     playerId: deviceId,
   });
 };
+
   
 const getDeviceOrientation = () => {
     if (typeof DeviceOrientationEvent.requestPermission === "function") {
