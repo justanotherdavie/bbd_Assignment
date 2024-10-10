@@ -181,7 +181,7 @@ socket.on("assignHost", (data) => {
   if (!isHost) {
     startButton.style.display = "none";
     genMazeButton.style.display = "none";
-    // guideSpan.style.display = "none";
+    guideSpan.style.display = "none";
     guideSpan.textContent = "Join and wait for host to start game";
   }
 });

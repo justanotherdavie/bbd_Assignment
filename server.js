@@ -345,28 +345,28 @@ io.on("connection", (socket) => {
         totalYTilt += tiltValues[id].yTilt;
         totalGamma += tiltValues[id].gamma;
         totalBeta += tiltValues[id].beta;
-      //  numPlayers++;
+        numPlayers++;
       }
 
-      let avgXTilt=totalXTilt;
-      let avgYTilt= totalYTilt;
-      let avgGamma = totalGamma;
-      let avgBeta =totalBeta;
+      let avgXTilt;
+      let avgYTilt;
+      let avgGamma;
+      let avgBeta;
 
-      // if (numPlayers === 4) {
-      //   avgXTilt = maxXTilt;
-      //   avgYTilt = maxYTilt; // Corrected here
-      //   avgGamma = maxGamma;
-      //   avgBeta = maxBeta;
-      // } else if (numPlayers > 0) {
-      //   // Check to avoid division by zero
-      //   avgXTilt = totalXTilt / numPlayers;
-      //   avgYTilt = totalYTilt / numPlayers;
-      //   avgGamma = totalGamma / numPlayers;
-      //   avgBeta = totalBeta / numPlayers;
-      // } else {
-      //   avgXTilt = avgYTilt = avgGamma = avgBeta = 0;
-      // }
+      if (numPlayers === 4) {
+        avgXTilt = maxXTilt;
+        avgYTilt = maxYTilt; // Corrected here
+        avgGamma = maxGamma;
+        avgBeta = maxBeta;
+      } else if (numPlayers > 0) {
+        // Check to avoid division by zero
+        avgXTilt = totalXTilt / numPlayers;
+        avgYTilt = totalYTilt / numPlayers;
+        avgGamma = totalGamma / numPlayers;
+        avgBeta = totalBeta / numPlayers;
+      } else {
+        avgXTilt = avgYTilt = avgGamma = avgBeta = 0;
+      }
 
       updateBallsPosition(avgXTilt, avgYTilt);
       checkWin();
